@@ -11,7 +11,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/kaoru', (req: Request, res: Response) => {
-  res.send('Kaoru is a good man!');
+  res.send('Kaoru is a bad man!');
 });
 
 app.listen(port, () => {
