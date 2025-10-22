@@ -1,17 +1,21 @@
 import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
+import { env } from '@/config/env.ts';
+
 import type { Request, Response } from 'express';
 
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(cors());
+app.use(helmet());
+app.use(compression());
+const port = env.PORT || 3001;
 
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to your TypeScript Express API!');
-});
-
-app.get('/kaoru', (req: Request, res: Response) => {
-  res.send('Kaoru is a bad man!');
+app.get('/health', (req: Request, res: Response) => {
+  res.send({ status: 'ok', statusCode: 200, message: 'Server is running' });
 });
 
 app.listen(port, () => {
