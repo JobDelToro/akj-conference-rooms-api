@@ -9,5 +9,5 @@ export class Booking extends Entity<Booking> {
     updatedAt!: Date;
     title!: string;
     description?: string;
-    status!: 'pending' | 'confirmed' | 'cancelled';
+    status!: 'confirmed' | 'cancelled' | 'in_progress' | 'completed';
 }
