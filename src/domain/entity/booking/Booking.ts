@@ -1,7 +1,7 @@
 import { Entity } from "@/domain/entity/Entity.ts";
 
 export class Booking extends Entity<Booking> {
-    conferenceRoomId!: string;
+    bookingId!: string;
     userId!: string;
     startTime!: Date;
     endTime!: Date;
