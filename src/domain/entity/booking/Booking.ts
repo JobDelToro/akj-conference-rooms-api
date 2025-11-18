@@ -1,4 +1,4 @@
-import { Entity } from "@/domain/entity/Entity.ts";
+import { Entity } from "../Entity.ts";
 
 export class Booking extends Entity<Booking> {
     bookingId!: string;
