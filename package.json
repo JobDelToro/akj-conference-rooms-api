@@ -8,7 +8,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/app.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "db:create": "tsx scripts/db:create.ts",
+    "db:drop": "tsx scripts/db:drop.ts",
+    "db:migrate": "tsx scripts/db:migrate.ts",
+    "db:migrate:up": "tsx scripts/db:migrate.ts up",
+    "db:migrate:down": "tsx scripts/db:migrate.ts down",
+    "db:rollback": "tsx scripts/db:rollback.ts",
+    "db:seed": "tsx scripts/db:seed.ts",
+    "db:backup": "tsx scripts/db:backup.ts",
+    "db:restore": "tsx scripts/db:restore.ts",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate && npm run db:seed"
   },
   "author": "",
   "license": "ISC",
@@ -16,11 +26,13 @@
     "node": ">=22.19.0"
   },
   "dependencies": {
+    "@types/pg": "^8.15.6",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "helmet": "^8.1.0"
+    "helmet": "^8.1.0",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "@types/compression": "^1.8.1",
