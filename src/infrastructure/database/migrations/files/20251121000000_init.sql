@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(120) NOT NULL,
   role VARCHAR(50) NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS employees (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER UNIQUE,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID UNIQUE,
   name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
   email VARCHAR(255) NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS employees (
 );
 
 CREATE TABLE IF NOT EXISTS bookings (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER NOT NULL,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT,
   start_time TIMESTAMP NOT NULL,
