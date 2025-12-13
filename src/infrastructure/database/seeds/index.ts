@@ -2,6 +2,7 @@ import { getPool } from '../connection.ts';
 import { seedUsers } from './users.seed.ts';
 import { seedEmployees } from './employees.seed.ts';
 import { seedBookings } from './bookings.seed.ts';
+import { seedEquipment } from './equipment.seed.ts';
 
 export interface SeedFunction {
     name: string;
@@ -12,6 +13,7 @@ const seeds: SeedFunction[] = [
     { name: 'users', run: seedUsers },
     { name: 'employees', run: seedEmployees },
     { name: 'bookings', run: seedBookings },
+    { name: 'equipment', run: seedEquipment },
 ];
 
 /**
