@@ -34,3 +34,14 @@ CREATE TABLE IF NOT EXISTS bookings (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS rooms (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(255) NOT NULL,
+  capacity INTEGER NOT NULL,
+  accessibility_features TEXT[], 
+  photo_url TEXT NOT NULL,
+  status VARCHAR(20) NOT NULL CHECK (status IN ('active', 'maintenance', 'occupied')),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
