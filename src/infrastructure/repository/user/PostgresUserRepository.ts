@@ -1,4 +1,4 @@
-import type { IUserRepository } from '@/domain/repository/IUserRepository.ts';
+import type { IUserRepository } from '@/domain/repository/UserRepository.ts';
 import { User } from '@/domain/entity/user/User.ts';
 import { query, queryOne } from '@/infrastructure/database/connection.ts';
 

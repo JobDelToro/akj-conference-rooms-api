@@ -1,5 +1,5 @@
 import { User } from "@/domain/entity/user/User.ts";
-import { UserRepository } from "@/domain/repository/UserRepository.ts";
+import type { UserRepository } from "@/domain/repository/UserRepository.ts";
 
 export class CreateUserUseCase {
     constructor(private readonly userRepository: UserRepository) {}

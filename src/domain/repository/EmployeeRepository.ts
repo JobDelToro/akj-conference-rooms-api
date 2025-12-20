@@ -1,6 +1,6 @@
 import { Employee } from '@/domain/entity/employee/Employee.ts';
 
-export interface IEmployeeRepository {
+export interface EmployeeRepository {
     create(employee: Partial<Employee>): Promise<Employee>;
     findById(id: string | number): Promise<Employee | null>;
     findByUserId(userId: string | number): Promise<Employee | null>;
