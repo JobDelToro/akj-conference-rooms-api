@@ -1,8 +1,8 @@
-import type { IEmployeeRepository } from '@/domain/repository/IEmployeeRepository.ts';
+import type { EmployeeRepository } from '@/domain/repository/EmployeeRepository.ts';
 import { Employee } from '@/domain/entity/employee/Employee.ts';
 import { query, queryOne } from '@/infrastructure/database/connection.ts';
 
-export class PostgresEmployeeRepository implements IEmployeeRepository {
+export class PostgresEmployeeRepository implements EmployeeRepository {
     async create(employee: Partial<Employee> & { userId: string }): Promise<Employee> {
         const sql = `
             INSERT INTO employees (user_id, name, last_name, email, phone, address, position, created_at, updated_at)

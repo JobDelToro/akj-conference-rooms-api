@@ -1,8 +1,8 @@
-import type { IBookingRepository } from '@/domain/repository/IBookingRepository.ts';
+import type { BookingRepository } from '@/domain/repository/BookingRepository.ts';
 import { Booking } from '@/domain/entity/booking/Booking.ts';
 import { query, queryOne } from '@/infrastructure/database/connection.ts';
 
-export class PostgresBookingRepository implements IBookingRepository {
+export class PostgresBookingRepository implements BookingRepository {
     async create(booking: Partial<Booking>): Promise<Booking> {
         const sql = `
             INSERT INTO bookings (user_id, title, description, start_time, end_time, status, created_at, updated_at)

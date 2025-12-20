@@ -1,6 +1,6 @@
 import { Booking } from '@/domain/entity/booking/Booking.ts';
 
-export interface IBookingRepository {
+export interface BookingRepository {
     create(booking: Partial<Booking>): Promise<Booking>;
     findById(id: string | number): Promise<Booking | null>;
     findByUserId(userId: string | number): Promise<Booking[]>;
