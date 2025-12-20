@@ -6,3 +6,4 @@ dist
 # Database backups
 database/backups/*.sql
 !database/backups/.gitkeep
+.DS_Store
