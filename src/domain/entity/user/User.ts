@@ -7,6 +7,6 @@ export class User extends Entity<User & Employee> {
     password!: string;
     role!: string;
     status!: 'active' | 'inactive' | 'pending' | 'blocked' | 'deleted';
-    createdAt!: Date;
-    updatedAt!: Date;
+    created_at!: Date;
+    updated_at!: Date;
 };
