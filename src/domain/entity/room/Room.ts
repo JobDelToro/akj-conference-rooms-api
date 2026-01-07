@@ -4,7 +4,9 @@ export class Room extends Entity<Room>{
   id!: string;
   name!: string;
   capacity!: number;                  
-  accessibilityFeatures?: string[];   
-  photoUrl!: string;                  
-  status!: 'active' | 'maintenance' | 'occupied' ;  
+  accessibility_features?: string[];   
+  photo_url!: string;                  
+  status!: 'active' | 'maintenance' | 'occupied' ;
+  created_at!: Date;
+  updated_at!: Date;
 }

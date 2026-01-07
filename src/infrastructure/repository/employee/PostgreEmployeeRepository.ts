@@ -7,12 +7,12 @@ export class PostgresEmployeeRepository implements EmployeeRepository {
         const sql = `
             INSERT INTO employees (user_id, name, last_name, email, phone, address, position, created_at, updated_at)
             VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW())
-            RETURNING id, user_id as "userId", name, last_name as "lastName", email, phone, address, position, created_at as "createdAt", updated_at as "updatedAt"
+            RETURNING id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
         `;
         const params = [
-            employee.userId, // We need userId to link to the user
+            employee.user_id, // We need userId to link to the user
             employee.name,
-            employee.lastName,
+            employee.last_name,
             employee.email,
             employee.phone,
             employee.address,
@@ -26,7 +26,7 @@ export class PostgresEmployeeRepository implements EmployeeRepository {
 
     async findById(id: string | number): Promise<Employee | null> {
         const sql = `
-            SELECT id, user_id as "userId", name, last_name as "lastName", email, phone, address, position, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
             FROM employees
             WHERE id = $1
         `;
@@ -35,7 +35,7 @@ export class PostgresEmployeeRepository implements EmployeeRepository {
 
     async findByUserId(userId: string | number): Promise<Employee | null> {
         const sql = `
-            SELECT id, user_id as "userId", name, last_name as "lastName", email, phone, address, position, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
             FROM employees
             WHERE user_id = $1
         `;
@@ -44,7 +44,7 @@ export class PostgresEmployeeRepository implements EmployeeRepository {
 
     async findAll(): Promise<Employee[]> {
         const sql = `
-            SELECT id, user_id as "userId", name, last_name as "lastName", email, phone, address, position, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
             FROM employees
         `;
         return query<Employee>(sql);
@@ -61,13 +61,13 @@ export class PostgresEmployeeRepository implements EmployeeRepository {
                 position = COALESCE($7, position),
                 updated_at = NOW()
             WHERE id = $1
-            RETURNING id, user_id as "userId", name, last_name as "lastName", email, phone, address, position, created_at as "createdAt", updated_at as "updatedAt"
+            RETURNING id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
         `;
 
         const params = [
             id,
             employee.name,
-            employee.lastName,
+            employee.last_name,
             employee.email,
             employee.phone,
             employee.address,

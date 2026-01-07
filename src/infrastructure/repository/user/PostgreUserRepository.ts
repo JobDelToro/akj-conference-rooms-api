@@ -1,15 +1,20 @@
-import type { IUserRepository } from '@/domain/repository/UserRepository.ts';
+import type { UserRepository } from '@/domain/repository/UserRepository.ts';
 import { User } from '@/domain/entity/user/User.ts';
 import { query, queryOne } from '@/infrastructure/database/connection.ts';
 
-export class PostgresUserRepository implements IUserRepository {
+export class PostgresUserRepository implements UserRepository {
     async create(user: Partial<User>): Promise<User> {
         const sql = `
             INSERT INTO users (email, password, role, status, created_at, updated_at)
             VALUES ($1, $2, $3, $4, NOW(), NOW())
-            RETURNING id, email, password, role, status, created_at as "createdAt", updated_at as "updatedAt"
+            RETURNING id, email, password, role, status, created_at, updated_at
         `;
-        const params = [user.email, user.password, user.role, user.status];
+        const params = [
+            user.email, 
+            user.password, 
+            user.role, 
+            user.status
+        ];
         const result = await queryOne<User>(sql, params);
 
         if (!result) throw new Error('Failed to create user');
@@ -18,7 +23,7 @@ export class PostgresUserRepository implements IUserRepository {
 
     async findById(id: string | number): Promise<User | null> {
         const sql = `
-            SELECT id, email, password, role, status, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, email, password, role, status, created_at, updated_at
             FROM users
             WHERE id = $1
         `;
@@ -27,7 +32,7 @@ export class PostgresUserRepository implements IUserRepository {
 
     async findByEmail(email: string): Promise<User | null> {
         const sql = `
-            SELECT id, email, password, role, status, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, email, password, role, status, created_at, updated_at
             FROM users
             WHERE email = $1
         `;
@@ -36,7 +41,7 @@ export class PostgresUserRepository implements IUserRepository {
 
     async findAll(): Promise<User[]> {
         const sql = `
-            SELECT id, email, password, role, status, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, email, password, role, status, created_at, updated_at
             FROM users
         `;
         return query<User>(sql);
@@ -56,10 +61,16 @@ export class PostgresUserRepository implements IUserRepository {
                 status = COALESCE($5, status),
                 updated_at = NOW()
             WHERE id = $1
-            RETURNING id, email, password, role, status, created_at as "createdAt", updated_at as "updatedAt"
+            RETURNING id, email, password, role, status, created_at, updated_at
         `;
 
-        const params = [id, user.email, user.password, user.role, user.status];
+        const params = [
+            id, 
+            user.email, 
+            user.password, 
+            user.role, 
+            user.status
+        ];
         const result = await queryOne<User>(sql, params);
 
         if (!result) throw new Error('User not found or failed to update');

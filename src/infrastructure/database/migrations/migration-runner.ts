@@ -119,14 +119,14 @@ export async function runMigrations(direction: 'up' | 'down' = 'up'): Promise<vo
         }
 
         const lastMigration = executed[executed.length - 1];
-        const filePath = join(__dirname, 'files', lastMigration);
+        const filePath = join(__dirname, 'files', lastMigration!);
 
         console.log(`Rolling back migration: ${lastMigration}`);
 
         // For rollback, we'd need a separate rollback file or parse the migration
         // For simplicity, we'll just remove it from the migrations table
         // In production, you'd want proper rollback SQL files
-        await unmarkMigration(lastMigration);
+        await unmarkMigration(lastMigration!);
         console.log(`  ✓ Rollback completed: ${lastMigration}`);
     }
 }

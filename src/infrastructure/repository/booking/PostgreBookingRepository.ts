@@ -7,14 +7,14 @@ export class PostgresBookingRepository implements BookingRepository {
         const sql = `
             INSERT INTO bookings (user_id, title, description, start_time, end_time, status, created_at, updated_at)
             VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())
-            RETURNING id as "bookingId", user_id as "userId", title, description, start_time as "startTime", end_time as "endTime", status, created_at as "createdAt", updated_at as "updatedAt"
+            RETURNING id, user_id, title, description, start_time, end_time, status, created_at, updated_at
         `;
         const params = [
-            booking.userId,
+            booking.user_id,
             booking.title,
             booking.description,
-            booking.startTime,
-            booking.endTime,
+            booking.start_time,
+            booking.end_time,
             booking.status
         ];
         const result = await queryOne<Booking>(sql, params);
@@ -25,7 +25,7 @@ export class PostgresBookingRepository implements BookingRepository {
 
     async findById(id: string | number): Promise<Booking | null> {
         const sql = `
-            SELECT id as "bookingId", user_id as "userId", title, description, start_time as "startTime", end_time as "endTime", status, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, user_id, title, description, start_time, end_time, status, created_at, updated_at
             FROM bookings
             WHERE id = $1
         `;
@@ -34,7 +34,7 @@ export class PostgresBookingRepository implements BookingRepository {
 
     async findByUserId(userId: string | number): Promise<Booking[]> {
         const sql = `
-            SELECT id as "bookingId", user_id as "userId", title, description, start_time as "startTime", end_time as "endTime", status, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, user_id, title, description, start_time, end_time, status, created_at, updated_at
             FROM bookings
             WHERE user_id = $1
         `;
@@ -43,7 +43,7 @@ export class PostgresBookingRepository implements BookingRepository {
 
     async findAll(): Promise<Booking[]> {
         const sql = `
-            SELECT id as "bookingId", user_id as "userId", title, description, start_time as "startTime", end_time as "endTime", status, created_at as "createdAt", updated_at as "updatedAt"
+            SELECT id, user_id, title, description, start_time, end_time, status, created_at, updated_at
             FROM bookings
         `;
         return query<Booking>(sql);
@@ -59,15 +59,15 @@ export class PostgresBookingRepository implements BookingRepository {
                 status = COALESCE($6, status),
                 updated_at = NOW()
             WHERE id = $1
-            RETURNING id as "bookingId", user_id as "userId", title, description, start_time as "startTime", end_time as "endTime", status, created_at as "createdAt", updated_at as "updatedAt"
+            RETURNING id, user_id, title, description, start_time, end_time, status, created_at, updated_at
         `;
 
         const params = [
             id,
             booking.title,
             booking.description,
-            booking.startTime,
-            booking.endTime,
+            booking.start_time,
+            booking.end_time,
             booking.status
         ];
         const result = await queryOne<Booking>(sql, params);
