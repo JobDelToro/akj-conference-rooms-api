@@ -1,8 +1,8 @@
-import type { IEquipmentRepository } from '@/domain/repository/IEquipmentRepository.ts';
+import type { EquipmentRepository } from '@/domain/repository/EquipmentRepository.ts';
 import { Equipment } from '@/domain/entity/equipment/Equipment.ts';
 import { query, queryOne } from '@/infrastructure/database/connection.ts';
 
-export class PostgreEquipmentRepository implements IEquipmentRepository {
+export class PostgreEquipmentRepository implements EquipmentRepository {
     async create(equipment: Partial<Equipment>): Promise<Equipment> {
         const sql = `
             INSERT INTO equipment (name, description, type, status, created_at, updated_at)
