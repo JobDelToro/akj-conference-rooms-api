@@ -4,6 +4,7 @@ export interface EmployeeRepository {
     create(employee: Partial<Employee>): Promise<Employee>;
     findById(id: string | number): Promise<Employee | null>;
     findByUserId(userId: string | number): Promise<Employee | null>;
+    findByEmail(email: string): Promise<Employee | null>;
     findAll(): Promise<Employee[]>;
     update(id: string | number, employee: Partial<Employee>): Promise<Employee>;
     delete(id: string | number): Promise<void>;
