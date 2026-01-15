@@ -42,6 +42,15 @@ export class PostgresEmployeeRepository implements EmployeeRepository {
         return queryOne<Employee>(sql, [userId]);
     }
 
+    async findByEmail(email: string): Promise<Employee | null> {
+        const sql = `
+            SELECT id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
+            FROM employees
+            WHERE email = $1
+        `;
+        return queryOne<Employee>(sql, [email]);
+    }
+
     async findAll(): Promise<Employee[]> {
         const sql = `
             SELECT id, user_id, name, last_name, email, phone, address, position, created_at, updated_at
